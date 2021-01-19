@@ -10,14 +10,9 @@ async function getResult(pageNum = 1, pageSize = 1000) {
 }
 
 
-async function postResult(g) {
-  const docs = await Result.find({ phone: g.phone });
-
-  if (docs.length === 0) {
-    return await new Result(g).save();
-  } else {
-    return 1000;
-  }
+async function postResult(str) {
+  const rs = await Result({ str: JSON.stringify(str) }).save();
+  console.log(rs)
 }
 
 module.exports = {

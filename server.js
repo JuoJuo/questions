@@ -1,11 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const { getResult, postResult } = require('./dao/Result');
 const app = express();
 
 const data = require(path.resolve(__dirname, 'questions.json'));
 const { count } = require(path.resolve(__dirname, 'count.json'));
 
+
+app.use(express.json());
 
 function random() {
   const rs = [];
@@ -23,7 +26,14 @@ app.get('/questions', (req, res) => {
 });
 
 app.post('/answers', (req, res) => {
-  res.json(data);
+  console.log(req.body);
+  postResult(req.body);
+  res.json({ data: 'ok' });
+});
+
+app.get('/manageQuestions',async (req, res) => {
+  const docs = await getResult();
+  res.json(docs);
 });
 
 const port = 5689;

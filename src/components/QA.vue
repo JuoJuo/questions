@@ -85,7 +85,8 @@
                   if (this.i !== this.data.length - 1) {
                     this.i += 1;
                   } else {
-                    console.log('game over~~~~~~~')
+                    console.log('game over~~~~~~~');
+                    this.sendAns();
                     this.open();
                   }
                 }
@@ -114,6 +115,19 @@
       });
     },
     methods: {
+      sendAns() {
+        fetch('/answers', {
+          method: 'POST',
+          body: JSON.stringify({ data: this.data, num: this.num, sex: this.sex }),
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          })
+        })
+          .then(response => response.json())
+          .then((data) => {
+            console.log('send done~');
+          });
+      },
       startQuiz() {
         console.log('get questions');
         console.log('transform questions');

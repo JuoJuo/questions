@@ -1,17 +1,13 @@
 <template>
   <div id="app">
-    <QA />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import QA from './components/QA.vue'
 
 export default {
   name: 'App',
-  components: {
-    QA
-  }
 }
 </script>
 
@@ -23,5 +19,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 </style>
